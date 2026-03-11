@@ -1,11 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/soft_card.dart';
 import '../auth/login_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  Future<void> _openWhatsApp() async {
+    final Uri uri = Uri.parse(
+        'https://wa.me/923148272532?text=I%20want%20to%20register%20as%20a%20doctor%20on%20DocBook.');
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Could not open WhatsApp')),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,13 +91,17 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 32),
 
             // Profile Options
-            _buildProfileOption(Icons.person_outline_rounded, 'Personal Information'),
+            _buildProfileOption(
+                Icons.person_outline_rounded, 'Personal Information'),
             _buildProfileOption(Icons.history_rounded, 'Appointment History'),
             _buildProfileOption(Icons.payment_rounded, 'Payment Methods'),
-            _buildProfileOption(Icons.notifications_none_rounded, 'Notifications'),
+            _buildProfileOption(
+                Icons.notifications_none_rounded, 'Notifications'),
             _buildProfileOption(Icons.settings_outlined, 'Settings'),
             _buildProfileOption(Icons.help_outline_rounded, 'Help & Support'),
 
+            const SizedBox(height: 16),
+            _buildRegisterDoctorBanner(),
             const SizedBox(height: 32),
 
             // Logout Button
@@ -102,6 +127,61 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRegisterDoctorBanner() {
+    return GestureDetector(
+      onTap: _openWhatsApp,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFF00C853), Color(0xFF1DE9B6)],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+                color: const Color(0xFF00C853).withOpacity(0.35),
+                blurRadius: 14,
+                offset: const Offset(0, 6))
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 46,
+              height: 46,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.2),
+                shape: BoxShape.circle,
+              ),
+              child: const FaIcon(FontAwesomeIcons.whatsapp,
+                  color: Colors.white, size: 24),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Register as Doctor',
+                      style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700)),
+                  Text('Tap to connect via WhatsApp',
+                      style: GoogleFonts.poppins(
+                          color: Colors.white.withOpacity(0.9), fontSize: 11)),
+                ],
+              ),
+            ),
+            const Icon(Icons.arrow_forward_ios_rounded,
+                color: Colors.white, size: 16),
           ],
         ),
       ),
