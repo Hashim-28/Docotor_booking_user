@@ -1,0 +1,31 @@
+name: doctor_app
+description: "A modern doctor appointment booking app with Soft-UI design."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  google_fonts: ^6.2.1
+  font_awesome_flutter: ^10.7.0
+  url_launcher: 6.1.11
+  intl: ^0.19.0
+  uuid: ^4.3.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+dependency_overrides:
+  objective_c: 1.1.0
+  path_provider_foundation: 2.4.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
