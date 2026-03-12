@@ -5,6 +5,9 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/soft_card.dart';
 import '../auth/login_screen.dart';
+import 'personal_info_screen.dart';
+import 'appointment_history_screen.dart';
+import 'terms_policies_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -92,13 +95,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             // Profile Options
             _buildProfileOption(
-                Icons.person_outline_rounded, 'Personal Information'),
-            _buildProfileOption(Icons.history_rounded, 'Appointment History'),
-            _buildProfileOption(Icons.payment_rounded, 'Payment Methods'),
-            _buildProfileOption(
-                Icons.notifications_none_rounded, 'Notifications'),
-            _buildProfileOption(Icons.settings_outlined, 'Settings'),
-            _buildProfileOption(Icons.help_outline_rounded, 'Help & Support'),
+                Icons.person_outline_rounded, 'Personal Information', () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const PersonalInfoScreen()),
+              );
+            }),
+            _buildProfileOption(Icons.history_rounded, 'Appointment History',
+                () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => const AppointmentHistoryScreen()),
+              );
+            }),
+            _buildProfileOption(Icons.description_outlined, 'Terms & Policies',
+                () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const TermsPoliciesScreen()),
+              );
+            }),
 
             const SizedBox(height: 16),
             _buildRegisterDoctorBanner(),
@@ -188,11 +205,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildProfileOption(IconData icon, String title) {
+  Widget _buildProfileOption(IconData icon, String title, VoidCallback onTap) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: SoftCard(
-        onTap: () {},
+        onTap: onTap,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: Row(
           children: [
