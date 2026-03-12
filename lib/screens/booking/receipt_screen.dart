@@ -69,7 +69,7 @@ class _ReceiptScreenState extends State<ReceiptScreen>
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                            color: AppTheme.primary.withOpacity(0.4),
+                            color: AppTheme.primary.withValues(alpha: 0.1),
                             blurRadius: 20,
                             spreadRadius: 2,
                             offset: const Offset(0, 8))
@@ -179,7 +179,7 @@ class _TicketCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               blurRadius: 20,
               offset: const Offset(0, 8))
         ],
@@ -214,7 +214,7 @@ class _TicketCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 5),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text('CONFIRMED',
@@ -285,10 +285,10 @@ class _TicketCard extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   decoration: BoxDecoration(
-                    color: AppTheme.primary.withOpacity(0.08),
+                    color: AppTheme.primary.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(14),
                     border: Border.all(
-                        color: AppTheme.primary.withOpacity(0.2), width: 1),
+                        color: AppTheme.primary.withValues(alpha: 0.1), width: 1),
                   ),
                   child: Column(
                     children: [

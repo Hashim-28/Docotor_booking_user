@@ -55,7 +55,7 @@ class SpecialtyDoctorsScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.person_search_rounded,
+                  const Icon(Icons.person_search_rounded,
                       size: 60, color: AppTheme.textLight),
                   const SizedBox(height: 12),
                   Text('No doctors available',
@@ -155,7 +155,7 @@ class _DoctorListCard extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
-                            color: AppTheme.star.withOpacity(0.12),
+                            color: AppTheme.star.withValues(alpha: 0.12),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Row(
@@ -178,7 +178,7 @@ class _DoctorListCard extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
-                            color: AppTheme.primary.withOpacity(0.1),
+                            color: AppTheme.primary.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(

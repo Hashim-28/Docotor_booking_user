@@ -56,7 +56,7 @@ class HospitalDoctorsScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.person_search_rounded,
+                  const Icon(Icons.person_search_rounded,
                       size: 60, color: AppTheme.textLight),
                   const SizedBox(height: 12),
                   Text('No registered doctors found here',

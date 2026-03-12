@@ -150,8 +150,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
           ),
           const SizedBox(height: 8),
           DropdownButtonFormField<String>(
-            value: _selectedGender,
-            icon: Icon(Icons.arrow_drop_down_rounded, color: AppTheme.primary),
+            initialValue: _selectedGender,
+            icon: const Icon(Icons.arrow_drop_down_rounded, color: AppTheme.primary),
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.male_outlined, color: AppTheme.primary, size: 20),
               filled: true,

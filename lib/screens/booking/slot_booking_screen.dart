@@ -156,7 +156,7 @@ class _SlotBookingScreenState extends State<SlotBookingScreen> {
                         boxShadow: isSelected
                             ? [
                                 BoxShadow(
-                                    color: AppTheme.primary.withOpacity(0.4),
+                                 color: AppTheme.primary.withValues(alpha: 0.4),
                                     blurRadius: 12,
                                     offset: const Offset(0, 5))
                               ]
@@ -168,8 +168,7 @@ class _SlotBookingScreenState extends State<SlotBookingScreen> {
                           Text(
                             DateFormat('dd').format(date),
                             style: GoogleFonts.poppins(
-                                color:
-                                    isSelected ? Colors.white : AppTheme.textDark,
+                                color: isSelected ? Colors.white : AppTheme.primary.withValues(alpha: 0.1),
                                 fontSize: 18,
                                 fontWeight: FontWeight.w700),
                           ),
@@ -177,7 +176,7 @@ class _SlotBookingScreenState extends State<SlotBookingScreen> {
                             DateFormat('EEE').format(date),
                             style: GoogleFonts.poppins(
                                 color: isSelected
-                                    ? Colors.white.withOpacity(0.85)
+                                    ? Colors.white.withValues(alpha: 0.85)
                                     : AppTheme.textMedium,
                                 fontSize: 11),
                           ),
@@ -185,7 +184,7 @@ class _SlotBookingScreenState extends State<SlotBookingScreen> {
                             DateFormat('MMM').format(date),
                             style: GoogleFonts.poppins(
                                 color: isSelected
-                                    ? Colors.white.withOpacity(0.75)
+                                    ? Colors.white.withValues(alpha: 0.75)
                                     : AppTheme.textLight,
                                 fontSize: 10),
                           ),
@@ -226,7 +225,7 @@ class _SlotBookingScreenState extends State<SlotBookingScreen> {
                       boxShadow: isSelected
                           ? [
                               BoxShadow(
-                                  color: AppTheme.primary.withOpacity(0.35),
+                                  color: AppTheme.primary.withValues(alpha: 0.35),
                                   blurRadius: 10,
                                   offset: const Offset(0, 4))
                             ]

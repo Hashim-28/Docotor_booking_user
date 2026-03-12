@@ -110,7 +110,7 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      AppTheme.primary.withOpacity(0.85),
+                      AppTheme.primary.withValues(alpha: 0.1),
                       AppTheme.primaryDark
                     ],
                     begin: Alignment.topLeft,
@@ -119,7 +119,7 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                        color: AppTheme.primary.withOpacity(0.35),
+                        color: AppTheme.primary.withValues(alpha: 0.1),
                         blurRadius: 14,
                         offset: const Offset(0, 6))
                   ],

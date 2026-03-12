@@ -25,7 +25,7 @@ class DoctorDetailScreen extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.25),
+                    color: Colors.white.withValues(alpha: 0.25),
                     borderRadius: BorderRadius.circular(12)),
                 child: const Icon(Icons.arrow_back_ios_new_rounded,
                     color: Colors.white, size: 18),
@@ -51,7 +51,7 @@ class DoctorDetailScreen extends StatelessWidget {
                       gradient: LinearGradient(
                         colors: [
                           Colors.transparent,
-                          Colors.black.withOpacity(0.55),
+                          Colors.black.withValues(alpha: 0.55),
                         ],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
@@ -73,7 +73,7 @@ class DoctorDetailScreen extends StatelessWidget {
                                 fontWeight: FontWeight.w700)),
                         Text(doctor.specialty,
                             style: GoogleFonts.poppins(
-                                color: Colors.white.withOpacity(0.9),
+                                color: Colors.white.withValues(alpha: 0.9),
                                 fontSize: 14)),
                       ],
                     ),
@@ -127,7 +127,7 @@ class DoctorDetailScreen extends StatelessWidget {
                           width: 44,
                           height: 44,
                           decoration: BoxDecoration(
-                            color: AppTheme.primary.withOpacity(0.1),
+                            color: AppTheme.primary.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(14),
                           ),
                           child: const Icon(Icons.local_hospital_rounded,
@@ -160,7 +160,7 @@ class DoctorDetailScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          AppTheme.primary.withOpacity(0.85),
+                          AppTheme.primary.withValues(alpha: 0.85),
                           AppTheme.primaryDark
                         ],
                         begin: Alignment.centerLeft,
@@ -169,7 +169,7 @@ class DoctorDetailScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(18),
                       boxShadow: [
                         BoxShadow(
-                            color: AppTheme.primary.withOpacity(0.35),
+                            color: AppTheme.primary.withValues(alpha: 0.35),
                             blurRadius: 12,
                             offset: const Offset(0, 5))
                       ],
@@ -180,7 +180,7 @@ class DoctorDetailScreen extends StatelessWidget {
                           width: 44,
                           height: 44,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(14),
                           ),
                           child: const Icon(Icons.payments_rounded,
@@ -192,7 +192,7 @@ class DoctorDetailScreen extends StatelessWidget {
                           children: [
                             Text('Consultation Fee',
                                 style: GoogleFonts.poppins(
-                                    color: Colors.white.withOpacity(0.85),
+                                    color: Colors.white.withValues(alpha: 0.85),
                                     fontSize: 12)),
                             Text(
                                 'PKR ${doctor.fee.toInt()}',
@@ -255,7 +255,7 @@ class DoctorDetailScreen extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18)),
                         elevation: 0,
-                        shadowColor: AppTheme.primary.withOpacity(0.4),
+                        shadowColor: AppTheme.primary.withValues(alpha: 0.4),
                       ),
                     ),
                   ),

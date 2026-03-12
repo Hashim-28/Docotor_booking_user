@@ -174,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen>
                     children: [
                       Text('Good Evening 👋',
                           style: GoogleFonts.poppins(
-                              color: Colors.white.withOpacity(0.85),
+                              color: Colors.white.withValues(alpha: 0.85),
                               fontSize: 13)),
                       Text('Find Your Doctor',
                           style: GoogleFonts.poppins(
@@ -194,10 +194,10 @@ class _HomeScreenState extends State<HomeScreen>
                       width: 46,
                       height: 46,
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withValues(alpha: 0.2),
                         shape: BoxShape.circle,
                         border: Border.all(
-                            color: Colors.white.withOpacity(0.5), width: 1.5),
+                            color: Colors.white.withValues(alpha: 0.5), width: 1.5),
                       ),
                       child: const Icon(Icons.person_rounded,
                           color: Colors.white, size: 24),
@@ -214,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen>
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
+                        color: Colors.black.withValues(alpha: 0.1),
                         blurRadius: 12,
                         offset: const Offset(0, 4))
                   ],
@@ -299,7 +299,7 @@ class _HomeScreenState extends State<HomeScreen>
             boxShadow: isSelected
                 ? [
                     BoxShadow(
-                        color: AppTheme.primary.withOpacity(0.35),
+                        color: AppTheme.primary.withValues(alpha: 0.35),
                         blurRadius: 10,
                         offset: const Offset(0, 4))
                   ]
@@ -568,7 +568,7 @@ class _HospitalCard extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     decoration: BoxDecoration(
-                      color: AppTheme.primary.withOpacity(0.1),
+                      color: AppTheme.primary.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
@@ -597,7 +597,7 @@ class _HospitalCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: AppTheme.primaryLight.withOpacity(0.4),
+        color: AppTheme.primaryLight.withValues(alpha: 0.4),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(

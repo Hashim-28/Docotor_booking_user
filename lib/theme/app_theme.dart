@@ -25,7 +25,6 @@ class AppTheme {
         seedColor: primary,
         primary: primary,
         surface: surface,
-        background: background,
       ),
       scaffoldBackgroundColor: background,
       textTheme: GoogleFonts.poppinsTextTheme().copyWith(
@@ -93,13 +92,13 @@ class AppTheme {
   // Soft-UI shadow (neumorphic outward)
   static List<BoxShadow> softShadow = [
     BoxShadow(
-      color: Colors.white.withOpacity(0.9),
+      color: Colors.white.withValues(alpha: 0.9),
       offset: const Offset(-4, -4),
       blurRadius: 10,
       spreadRadius: 1,
     ),
     BoxShadow(
-      color: const Color(0xFFB8C4CE).withOpacity(0.5),
+      color: const Color(0xFFB8C4CE).withValues(alpha: 0.5),
       offset: const Offset(4, 4),
       blurRadius: 10,
       spreadRadius: 1,
@@ -109,13 +108,13 @@ class AppTheme {
   // Soft-UI shadow (inward/pressed)
   static List<BoxShadow> softShadowPressed = [
     BoxShadow(
-      color: const Color(0xFFB8C4CE).withOpacity(0.4),
+      color: const Color(0xFFB8C4CE).withValues(alpha: 0.4),
       offset: const Offset(4, 4),
       blurRadius: 10,
       spreadRadius: 1,
     ),
     BoxShadow(
-      color: Colors.white.withOpacity(0.9),
+      color: Colors.white.withValues(alpha: 0.9),
       offset: const Offset(-4, -4),
       blurRadius: 10,
       spreadRadius: 1,
@@ -125,13 +124,13 @@ class AppTheme {
   // Card shadow
   static List<BoxShadow> cardShadow = [
     BoxShadow(
-      color: Colors.black.withOpacity(0.07),
+      color: Colors.black.withValues(alpha: 0.07),
       offset: const Offset(0, 4),
       blurRadius: 15,
       spreadRadius: 0,
     ),
     BoxShadow(
-      color: Colors.white.withOpacity(0.8),
+      color: Colors.white.withValues(alpha: 0.8),
       offset: const Offset(0, -2),
       blurRadius: 6,
       spreadRadius: 0,

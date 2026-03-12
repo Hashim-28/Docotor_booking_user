@@ -164,7 +164,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-                color: const Color(0xFF00C853).withOpacity(0.35),
+                color: const Color(0xFF00C853).withValues(alpha: 0.35),
                 blurRadius: 14,
                 offset: const Offset(0, 6))
           ],
@@ -175,7 +175,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               width: 46,
               height: 46,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
+                color: Colors.white.withValues(alpha: 0.2),
                 shape: BoxShape.circle,
               ),
               child: const FaIcon(FontAwesomeIcons.whatsapp,
@@ -193,7 +193,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontWeight: FontWeight.w700)),
                   Text('Tap to connect via WhatsApp',
                       style: GoogleFonts.poppins(
-                          color: Colors.white.withOpacity(0.9), fontSize: 11)),
+                          color: Colors.white.withValues(alpha: 0.9), fontSize: 11)),
                 ],
               ),
             ),

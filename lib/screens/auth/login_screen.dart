@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen>
                             width: 80,
                             height: 80,
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
+                              color: Colors.white.withValues(alpha: 0.2),
                               shape: BoxShape.circle,
                             ),
                             child: const Icon(
@@ -118,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen>
                                   letterSpacing: 0.5)),
                           Text('Your Health, Our Priority',
                               style: GoogleFonts.poppins(
-                                  color: Colors.white.withOpacity(0.85),
+                                  color: Colors.white.withValues(alpha: 0.8),
                                   fontSize: 13)),
                         ],
                       ),
