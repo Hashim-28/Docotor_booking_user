@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/soft_card.dart';
 import 'register_screen.dart';
 import '../home/home_screen.dart';
+import '../doctors/doctor_dashboard.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -20,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen>
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
   bool _isLoading = false;
+  bool _isDoctorMode = false;
   late AnimationController _animController;
   late Animation<double> _fadeAnim;
   late Animation<Offset> _slideAnim;
@@ -54,11 +57,26 @@ class _LoginScreenState extends State<LoginScreen>
       if (mounted) {
         Navigator.of(context).pushReplacement(
           PageRouteBuilder(
-            pageBuilder: (_, a, __) => const HomeScreen(),
+            pageBuilder: (_, a, __) =>
+                _isDoctorMode ? const DoctorDashboard() : const HomeScreen(),
             transitionsBuilder: (_, anim, __, child) =>
                 FadeTransition(opacity: anim, child: child),
             transitionDuration: const Duration(milliseconds: 500),
           ),
+        );
+      }
+    }
+  }
+
+  Future<void> _openWhatsApp() async {
+    final Uri uri = Uri.parse(
+        'https://wa.me/923148272532?text=I%20want%20to%20register%20as%20a%20doctor%20on%20DocBook.');
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Could not open WhatsApp')),
         );
       }
     }
@@ -69,13 +87,11 @@ class _LoginScreenState extends State<LoginScreen>
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppTheme.background,
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: size.height,
-          child: FadeTransition(
-            opacity: _fadeAnim,
-            child: SlideTransition(
-              position: _slideAnim,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
               child: Column(
                 children: [
                   // Header gradient area
@@ -110,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen>
                             ),
                           ),
                           const SizedBox(height: 14),
-                          Text('DocBook',
+                          Text('My Doctor',
                               style: GoogleFonts.poppins(
                                   color: Colors.white,
                                   fontSize: 28,
@@ -125,133 +141,126 @@ class _LoginScreenState extends State<LoginScreen>
                     ),
                   ),
 
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 28, vertical: 24),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Welcome Back',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w700,
-                                    color: AppTheme.textDark)),
-                            const SizedBox(height: 4),
-                            Text('Sign in to continue',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 13, color: AppTheme.textMedium)),
-                            const SizedBox(height: 24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 28, vertical: 24),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(_isDoctorMode ? 'Doctor Login' : 'Welcome Back',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppTheme.textDark)),
+                          const SizedBox(height: 4),
+                          Text(
+                              _isDoctorMode
+                                  ? 'Enter your professional credentials'
+                                  : 'Sign in to continue',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 13, color: AppTheme.textMedium)),
+                          const SizedBox(height: 24),
 
-                            // Email field
-                            _buildTextField(
-                              controller: _emailController,
-                              hint: 'Email Address',
-                              icon: Icons.email_outlined,
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (v) =>
-                                  v!.isEmpty ? 'Enter your email' : null,
-                            ),
-                            const SizedBox(height: 14),
+                          // Email/Number field
+                          _buildTextField(
+                            controller: _emailController,
+                            hint: 'Email or Phone Number',
+                            icon: Icons.person_outline_rounded,
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (v) => v!.isEmpty
+                                ? 'Enter your email or phone number'
+                                : null,
+                          ),
+                          const SizedBox(height: 14),
 
-                            // Password field
-                            _buildTextField(
-                              controller: _passwordController,
-                              hint: 'Password',
-                              icon: Icons.lock_outline_rounded,
-                              obscure: _obscurePassword,
-                              suffix: IconButton(
-                                icon: Icon(
-                                  _obscurePassword
-                                      ? Icons.visibility_off_outlined
-                                      : Icons.visibility_outlined,
-                                  color: AppTheme.textLight,
-                                  size: 20,
-                                ),
-                                onPressed: () => setState(
-                                    () => _obscurePassword = !_obscurePassword),
+                          // Password field
+                          _buildTextField(
+                            controller: _passwordController,
+                            hint: 'Password',
+                            icon: Icons.lock_outline_rounded,
+                            obscure: _obscurePassword,
+                            suffix: IconButton(
+                              icon: Icon(
+                                _obscurePassword
+                                    ? Icons.visibility_off_outlined
+                                    : Icons.visibility_outlined,
+                                color: AppTheme.textLight,
+                                size: 20,
                               ),
-                              validator: (v) =>
-                                  v!.length < 6 ? 'Min 6 characters' : null,
+                              onPressed: () => setState(
+                                  () => _obscurePassword = !_obscurePassword),
                             ),
+                            validator: (v) =>
+                                v!.length < 6 ? 'Min 6 characters' : null,
+                          ),
 
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: TextButton(
-                                onPressed: () {},
-                                child: Text('Forgot Password?',
-                                    style: GoogleFonts.poppins(
-                                        color: AppTheme.primary,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500)),
-                              ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text('Forgot Password?',
+                                  style: GoogleFonts.poppins(
+                                      color: AppTheme.primary,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500)),
                             ),
+                          ),
 
-                            // Login Button
-                            SizedBox(
-                              width: double.infinity,
-                              height: 54,
-                              child: ElevatedButton(
-                                onPressed: _isLoading ? null : _login,
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppTheme.primary,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(16)),
-                                    elevation: 0),
-                                child: _isLoading
-                                    ? const SizedBox(
-                                        width: 22,
-                                        height: 22,
-                                        child: CircularProgressIndicator(
-                                            color: Colors.white,
-                                            strokeWidth: 2.5))
-                                    : Text('Login',
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600)),
-                              ),
+                          // Login Button
+                          SizedBox(
+                            width: double.infinity,
+                            height: 54,
+                            child: ElevatedButton(
+                              onPressed: _isLoading ? null : _login,
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppTheme.primary,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16)),
+                                  elevation: 0),
+                              child: _isLoading
+                                  ? const SizedBox(
+                                      width: 22,
+                                      height: 22,
+                                      child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                          strokeWidth: 2.5))
+                                  : Text('Login',
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600)),
                             ),
-                            const SizedBox(height: 20),
+                          ),
+                          const SizedBox(height: 12),
 
-                            // Divider
-                            Row(children: [
-                              const Expanded(
-                                  child: Divider(color: Color(0xFFDDE3EB))),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 12),
-                                child: Text('OR',
-                                    style: GoogleFonts.poppins(
-                                        color: AppTheme.textLight,
-                                        fontSize: 12)),
-                              ),
-                              const Expanded(
-                                  child: Divider(color: Color(0xFFDDE3EB))),
-                            ]),
-                            const SizedBox(height: 16),
+                          // Toggle Login Type
+                          Center(
+                            child: TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isDoctorMode = !_isDoctorMode;
+                                });
+                              },
+                              child: Text(
+                                  _isDoctorMode
+                                      ? 'Login as Patient'
+                                      : 'Login as Doctor',
+                                  style: GoogleFonts.poppins(
+                                      color: AppTheme.primary,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600)),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
 
-                            // Social Buttons
-                            Row(children: [
-                              Expanded(
-                                  child: _socialButton(
-                                icon: FontAwesomeIcons.google,
-                                label: 'Google',
-                                iconColor: const Color(0xFFEA4335),
-                              )),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                  child: _socialButton(
-                                icon: FontAwesomeIcons.facebook,
-                                label: 'Facebook',
-                                iconColor: const Color(0xFF1877F2),
-                              )),
-                            ]),
-                            const Spacer(),
+                          if (_isDoctorMode) 
+                            _buildRegisterDoctorBanner(),
 
-                            // Register link
+                          const SizedBox(height: 32),
+
+                          // Register link
+                          if (!_isDoctorMode)
                             Center(
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -275,16 +284,71 @@ class _LoginScreenState extends State<LoginScreen>
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 8),
-                          ],
-                        ),
+                          const SizedBox(height: 16),
+                        ],
                       ),
                     ),
                   ),
                 ],
               ),
             ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildRegisterDoctorBanner() {
+    return GestureDetector(
+      onTap: _openWhatsApp,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFF00C853), Color(0xFF1DE9B6)],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
           ),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+                color: const Color(0xFF00C853).withValues(alpha: 0.35),
+                blurRadius: 14,
+                offset: const Offset(0, 6))
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 46,
+              height: 46,
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.2),
+                shape: BoxShape.circle,
+              ),
+              child: const FaIcon(FontAwesomeIcons.whatsapp,
+                  color: Colors.white, size: 24),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Register as Doctor',
+                      style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700)),
+                  Text('Tap to connect via WhatsApp',
+                      style: GoogleFonts.poppins(
+                          color: Colors.white.withValues(alpha: 0.9),
+                          fontSize: 11)),
+                ],
+              ),
+            ),
+            const Icon(Icons.arrow_forward_ios_rounded,
+                color: Colors.white, size: 16),
+          ],
         ),
       ),
     );

@@ -31,7 +31,7 @@ class AppointmentHistoryScreen extends StatelessWidget {
         'specialty': 'Pediatrician',
         'date': '05 Sept 2025',
         'time': '11:15 AM',
-        'status': 'Cancelled',
+        'status': 'Cancelled by Doctor',
         'statusColor': AppTheme.error,
       },
     ];

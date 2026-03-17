@@ -10,6 +10,7 @@ class Doctor {
   final double fee;
   final String experience;
   final String about;
+  final String city;
   final List<String> availableTimes;
 
   const Doctor({
@@ -24,6 +25,7 @@ class Doctor {
     required this.fee,
     required this.experience,
     required this.about,
+    required this.city,
     required this.availableTimes,
   });
 }

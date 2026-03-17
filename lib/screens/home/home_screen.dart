@@ -49,13 +49,19 @@ class _HomeScreenState extends State<HomeScreen>
         _filteredDoctors = MockData.doctors
             .where((d) =>
                 d.name.toLowerCase().contains(query.toLowerCase()) ||
-                d.specialty.toLowerCase().contains(query.toLowerCase()))
+                d.specialty.toLowerCase().contains(query.toLowerCase()) ||
+                d.city.toLowerCase().contains(query.toLowerCase()))
             .toList();
         _filteredHospitals = MockData.hospitals
-            .where((h) => h['name']
-                .toString()
-                .toLowerCase()
-                .contains(query.toLowerCase()))
+            .where((h) =>
+                h['name']
+                    .toString()
+                    .toLowerCase()
+                    .contains(query.toLowerCase()) ||
+                h['location']
+                    .toString()
+                    .toLowerCase()
+                    .contains(query.toLowerCase()))
             .toList();
       }
     });
@@ -225,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen>
                   style:
                       GoogleFonts.poppins(color: AppTheme.textDark, fontSize: 14),
                   decoration: InputDecoration(
-                    hintText: 'Search doctors, hospitals...',
+                    hintText: 'Search by name, city, specialty...',
                     hintStyle: GoogleFonts.poppins(
                         color: AppTheme.textLight, fontSize: 14),
                     prefixIcon: const Icon(Icons.search_rounded,

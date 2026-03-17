@@ -90,6 +90,7 @@ class MockData {
       experience: '12 Years',
       about:
           'Dr. Ali Khan is a board-certified cardiologist with over 12 years of experience treating complex heart conditions. He specializes in interventional cardiology and preventive cardiology.',
+      city: 'Islamabad',
       availableTimes: [
         '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM',
         '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM'
@@ -109,6 +110,7 @@ class MockData {
       experience: '9 Years',
       about:
           'Dr. Sara Ahmed is a compassionate cardiologist known for her patient-centered approach. She focuses on women\'s cardiovascular health and echocardiography.',
+      city: 'Karachi',
       availableTimes: [
         '11:00 AM', '11:30 AM', '2:00 PM', '2:30 PM',
         '3:00 PM', '3:30 PM', '4:00 PM'
@@ -128,6 +130,7 @@ class MockData {
       experience: '15 Years',
       about:
           'Dr. Hassan Raza is a senior cardiologist with extensive experience in cardiac surgery and pacemaker implantation procedures.',
+      city: 'Rawalpindi',
       availableTimes: [
         '8:30 AM', '9:00 AM', '9:30 AM',
         '5:00 PM', '5:30 PM', '6:00 PM'
@@ -148,6 +151,7 @@ class MockData {
       experience: '11 Years',
       about:
           'Dr. Zainab Malik is a leading neurologist specializing in stroke management, epilepsy, and movement disorders. She is known for her diagnostic precision.',
+      city: 'Islamabad',
       availableTimes: [
         '10:00 AM', '10:30 AM', '11:00 AM',
         '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM'
@@ -167,6 +171,7 @@ class MockData {
       experience: '8 Years',
       about:
           'Dr. Usman Farooq specializes in headache disorders, multiple sclerosis, and neurodegenerative diseases.',
+      city: 'Lahore',
       availableTimes: [
         '9:00 AM', '9:30 AM', '2:00 PM', '2:30 PM', '3:00 PM'
       ],
@@ -186,6 +191,7 @@ class MockData {
       experience: '7 Years',
       about:
           'Dr. Amna Siddiqui is an expert ENT surgeon with special interest in rhinology, sinus surgery, and pediatric ENT.',
+      city: 'Rawalpindi',
       availableTimes: [
         '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
         '4:00 PM', '4:30 PM', '5:00 PM'
@@ -205,6 +211,7 @@ class MockData {
       experience: '10 Years',
       about:
           'Dr. Tariq Mehmood specializes in hearing disorders, cochlear implants, and head & neck oncology.',
+      city: 'Rawalpindi',
       availableTimes: [
         '8:00 AM', '8:30 AM', '9:00 AM',
         '3:30 PM', '4:00 PM', '4:30 PM'
@@ -225,6 +232,7 @@ class MockData {
       experience: '13 Years',
       about:
           'Dr. Bilal Sheikh is a renowned orthopedic surgeon specializing in joint replacements, sports injuries, and spine surgery.',
+      city: 'Rawalpindi',
       availableTimes: [
         '9:30 AM', '10:00 AM', '10:30 AM',
         '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM'
@@ -245,6 +253,7 @@ class MockData {
       experience: '6 Years',
       about:
           'Dr. Hira Baig is a cosmetic and clinical dermatologist with expertise in laser treatments, acne, and skin cancer screenings.',
+      city: 'Islamabad',
       availableTimes: [
         '11:00 AM', '11:30 AM', '12:00 PM',
         '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM'
@@ -265,6 +274,7 @@ class MockData {
       experience: '14 Years',
       about:
           'Dr. Aamir Iqbal is a senior ophthalmologist specializing in cataract surgery, LASIK, and retinal diseases.',
+      city: 'Rawalpindi',
       availableTimes: [
         '9:00 AM', '9:30 AM', '10:00 AM',
         '3:00 PM', '3:30 PM', '4:00 PM'
@@ -285,6 +295,7 @@ class MockData {
       experience: '9 Years',
       about:
           'Dr. Rabia Noor is a beloved pediatrician known for her gentle approach. She specializes in neonatal care, childhood development, and vaccinations.',
+      city: 'Islamabad',
       availableTimes: [
         '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
         '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM'
@@ -305,6 +316,7 @@ class MockData {
       experience: '16 Years',
       about:
           'Dr. Kamran Javed is an experienced general physician with a wide-ranging practice covering internal medicine, preventive care, and chronic disease management.',
+      city: 'Islamabad',
       availableTimes: [
         '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM',
         '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM'
@@ -371,4 +383,38 @@ class MockData {
       'beds': 800,
     },
   ];
+
+  // Dynamic history storage for this session
+  static List<Map<String, String>> confirmedAppointments = [
+    {
+      'patientName': 'Ahmed Jamel',
+      'fatherName': 'Jamel Uddin',
+      'timeSlot': '09:00 AM - 09:30 AM',
+      'date': '16 Mar 2026',
+    },
+    {
+      'patientName': 'Marium Bibi',
+      'fatherName': 'Ghulam Mustafa',
+      'timeSlot': '10:30 AM - 11:00 AM',
+      'date': '16 Mar 2026',
+    },
+  ];
+
+  static List<Map<String, String>> cancelledAppointments = [
+    {
+      'patientName': 'Usman Khalid',
+      'fatherName': 'Khalid Mehmood',
+      'timeSlot': '03:00 PM - 03:30 PM',
+      'date': '16 Mar 2026',
+      'reason': 'Patient emergency',
+    },
+  ];
+
+  static void addConfirmed(Map<String, String> appointment) {
+    confirmedAppointments.insert(0, appointment);
+  }
+
+  static void addCancelled(Map<String, String> appointment) {
+    cancelledAppointments.insert(0, appointment);
+  }
 }
